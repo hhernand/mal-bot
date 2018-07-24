@@ -29,6 +29,12 @@ bot.on('message', (message) => {
     db.shop.shopList(message, Discord, con);
   }
 
+  // mod commands
+
+  if (msg.startsWith('!rewardmoney ')) {
+    db.money.rewardMoney(message, con);
+  }
+
   // misc
 
   if (msg == 'hi mal!') {
