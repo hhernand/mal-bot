@@ -23,6 +23,12 @@ bot.on('message', (message) => {
     db.member.myInfo(message, Discord, con);
   }
 
+  // shop
+
+  if (msg == '!shop') {
+    db.shop.shopList(message, Discord, con);
+  }
+
   // misc
 
   if (msg == 'hi mal!') {
