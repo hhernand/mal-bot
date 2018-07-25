@@ -39,6 +39,10 @@ bot.on('message', (message) => {
     db.money.rewardMoney(message, con);
   }
 
+  if (msg.startsWith('!take ')) {
+    db.item.take(message, con);
+  }
+
   // misc
 
   if (msg == 'hi mal!') {
