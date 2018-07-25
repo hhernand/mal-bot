@@ -30,25 +30,25 @@ module.exports = {
 
       access.itemByName(item, con, function(i) {
         if (i.length == 0) {
-          msg.channel.send('That item cannot be found in the shop.');
+          msg.channel.send(msg.author + ' That item cannot be found in the shop.');
         }
         if (i.length == 1) {
           let price = i[0].cost * want;
           access.memberByID(buyerID, con, function(member) {
             if (member.length == 0) {
-              msg.channel.send('You are currently not in the database.');
+              msg.channel.send(msg.author + ' You are currently not in the database.');
             }
             else {
               let mon = member[0].money;
               if (price > mon) {
-                msg.channel.send('You currently do not have enough money to purchase that item.');
+                msg.channel.send(msg.author + ' You currently do not have enough money to purchase that item.');
               }
               else {
                 let newMon = mon - price;
                 let iID = i[0].itemID;
                 helper.grantItem(buyerID, iID, want, con);
                 helper.loseMoney(buyerID, newMon, con);
-                let res = 'You have purchased ' + want + ' ' + i[0].name + ' for £' + price + '. Please use !myinfo to confirm that you obtained your item.'
+                let res = msg.author + ' You have purchased ' + want + ' ' + i[0].name + ' for £' + price + '. Please use !myinfo to confirm that you obtained your item.'
                 msg.channel.send(res);
               }
             }
