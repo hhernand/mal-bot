@@ -26,6 +26,18 @@ bot.on('message', (message) => {
     db.member.myInfo(message, Discord, con);
   }
 
+  if (msg.startsWith('!createtag')) {
+    db.tag.createTag(message, con);
+  }
+
+  if (msg.startsWith('!t ')) {
+    db.tag.tagRes(message, con);
+  }
+
+  if (msg.startsWith('!updatetag ')) {
+    db.tag.updateTag(message, con);
+  }
+
   if (msg.startsWith('!roll ')) {
     other.rng.roll(message);
   }
