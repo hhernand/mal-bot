@@ -9,15 +9,15 @@ module.exports = {
     return item;
   },
 
-  grantItem: function(id, item, con) {
+  grantItem: function(id, item, quan, con) {
     access.ownsSpecific(id, item, con, function(owns) {
       if (owns.length == 1) {
-        let newItem = owns[0].quantity + 1;
+        let newItem = owns[0].quantity + quan;
         let updateItem = 'UPDATE owns SET quantity = ' + newItem + ' WHERE memberID = "' + id + '" AND itemID = ' + item;
         con.query(updateItem);
       }
       else {
-        let newEntry = 'INSERT INTO owns VALUES("' + id + '", ' + item + ', ' + 1 + ')';
+        let newEntry = 'INSERT INTO owns VALUES("' + id + '", ' + item + ', ' + quan + ')';
         con.query(newEntry);
       }
     });

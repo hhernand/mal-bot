@@ -29,7 +29,11 @@ bot.on('message', (message) => {
     db.shop.shopList(message, Discord, con);
   }
 
-  // mod commands
+  if (msg.startsWith('!buy ')) {
+    db.shop.buy(message, con);
+  }
+
+  // mod command
 
   if (msg.startsWith('!rewardmoney ')) {
     db.money.rewardMoney(message, con);
