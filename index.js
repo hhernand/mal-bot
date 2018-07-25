@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const bot = new Discord.Client();
 
 const db = require('require-dir-all')('./commands/db');
+const other = require('require-dir-all')('./commands/other');
 
 var con;
 
@@ -15,32 +16,46 @@ bot.on('message', (message) => {
 
   // member commands
 
-  if (msg.startsWith('!add ')) {
-    db.member.addMember(message, con);
+  if (message.channel.id == '466370937562857474') {
+    if (msg.startsWith('!add ')) {
+      db.member.addMember(message, con);
+    }
   }
 
   if (msg == '!myinfo') {
     db.member.myInfo(message, Discord, con);
   }
 
+  if (msg.startsWith('!roll ')) {
+    other.rng.roll(message);
+  }
+
+  if (msg.startsWith('!rng ')) {
+    other.rng.rng(message);
+  }
+
   // shop
 
-  if (msg == '!shop') {
-    db.shop.shopList(message, Discord, con);
+  if (message.channel.id == '466371378917015558') {
+    if (msg == '!shop') {
+      db.shop.shopList(message, Discord, con);
+    }
+
+    if (msg.startsWith('!buy ')) {
+      db.shop.buy(message, con);
+    }
   }
 
-  if (msg.startsWith('!buy ')) {
-    db.shop.buy(message, con);
-  }
+  // mod commands
 
-  // mod command
+  if (message.channel.id == '466375930907197451') {
+    if (msg.startsWith('!rewardmoney ')) {
+      db.money.rewardMoney(message, con);
+    }
 
-  if (msg.startsWith('!rewardmoney ')) {
-    db.money.rewardMoney(message, con);
-  }
-
-  if (msg.startsWith('!take ')) {
-    db.item.take(message, con);
+    if (msg.startsWith('!take ')) {
+      db.item.take(message, con);
+    }
   }
 
   // misc
