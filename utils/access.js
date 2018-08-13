@@ -15,6 +15,23 @@ module.exports = {
     });
   },
 
+  charByName: function(type, fname, lname, con, callback) {
+    let sql = '';
+    if (fname != '' && lname != '') {
+      sql = 'SELECT * FROM ' + type + ' WHERE fname LIKE "%' + fname + '%" AND lname LIKE "%' + lname + '%"';
+    }
+    else if (fname == '') {
+      sql = 'SELECT * FROM ' + type + ' WHERE lname LIKE "%' + lname + '%"';
+    }
+    else {
+      sql = 'SELECT * FROM ' + type + ' WHERE fname LIKE "%' + fname + '%"';
+    }
+    con.query(sql, (err, char) => {
+      if (err) callback(err);
+      callback(char);
+    });
+  },
+
   itemByID: function(id, con, callback) {
     let sql = 'SELECT * FROM item WHERE itemID = ' + id;
     con.query(sql, (err, item) => {

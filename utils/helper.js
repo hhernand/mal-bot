@@ -50,5 +50,47 @@ module.exports = {
   loseMoney: function(id, amount, con) {
     let sql = 'UPDATE member SET money = ' + amount + ' WHERE memberID = "' + id + '"';
     con.query(sql);
+  },
+
+  nameConcat: function(arr, len) {
+    var names = [];
+    var name = [];
+    var fname = '';
+    var lname = '';
+
+    let j = 0;
+    let k = 0;
+
+    for (i = 0; i < len+1; i++) {
+      k = i;
+
+      while (j < i) {
+        fname += arr[j];
+        j++;
+        if (j < i) {
+          fname += ' ';
+        }
+      }
+
+      j = 0;
+
+      while (k < len) {
+        lname += arr[k];
+        k++;
+        if (k < len) {
+          lname += ' ';
+        }
+      }
+
+      name.push(fname);
+      name.push(lname);
+      names.push(name);
+
+      fname = '';
+      lname = '';
+      name = [];
+    }
+
+    return names;
   }
 }
