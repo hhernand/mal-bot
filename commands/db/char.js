@@ -3,6 +3,8 @@ const helper = require('../../utils/helper.js');
 
 module.exports = {
   search: function(msg, ds, con) {
+    let flag = 0;
+    let count = 0;
     let type = msg.content.split(' ')[1];
 
     if (type != 'agent' && type != 'civilian') {
@@ -30,6 +32,7 @@ module.exports = {
 
         access.charByName(type, fname, lname, con, function(char) {
           if (char.length == 1) {
+            flag = 1;
             let id = '';
             let n = char[0].fname + ' ' + char[0].lname + ', age ' + char[0].age;
             let rank = '';
@@ -62,6 +65,10 @@ module.exports = {
               .setDescription(info);
 
             msg.channel.send(embed);
+          }
+          count++;
+          if (count == names.length && flag == 0) {
+            msg.channel.send(type[0].toUpperCase() + type.substring(1) + ' does not exist in the database.');
           }
         })
       }
