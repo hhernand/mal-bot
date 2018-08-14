@@ -7,6 +7,7 @@ module.exports = {
     let name = msg.content.split(" ")[1];
     let sql = 'INSERT INTO member VALUES ("' + id + '", "' + name + '", 0)';
     con.query(sql);
+    msg.member.addRole('466428429412073493');
     let res = 'Greetings ' + name + '. Welcome to ODD.'
     msg.channel.send(res);
   },
