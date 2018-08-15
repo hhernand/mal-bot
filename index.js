@@ -50,6 +50,10 @@ bot.on('message', (message) => {
     other.rng.rng(message);
   }
 
+  if (msg == 'mal, bunny pls') {
+    db.bunny.showBunny(message, con);
+  }
+
   // shop
 
   if (message.channel.id == '466371378917015558') {
@@ -71,6 +75,10 @@ bot.on('message', (message) => {
 
     if (msg.startsWith('!take ')) {
       db.item.take(message, con);
+    }
+
+    if (msg.startsWith('mal, add bunny')){
+      db.bunny.addBunny(message, con);
     }
   }
 
