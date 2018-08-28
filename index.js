@@ -26,6 +26,10 @@ bot.on('message', (message) => {
     db.member.myInfo(message, Discord, con);
   }
 
+  if (msg.startsWith('!jobroll ')) {
+    db.char.jobroll(message, con);
+  }
+
   if (msg.startsWith('!search ')) {
     db.char.search(message, Discord, con);
   }

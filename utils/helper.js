@@ -92,5 +92,38 @@ module.exports = {
     }
 
     return names;
+  },
+
+  stat: function(st) {
+    let stats = ['stamina',
+                 'strength',
+                 'skill',
+                 'initiation',
+                 'restraint',
+                 'agility',
+                 'accuracy',
+                 'evasion',
+                 'magic',
+                 'healing',
+                 'regeneration',
+                 'critical',
+                 'discreet',
+                 'range',
+                 'power',
+                 'support'];
+    for (i = 0; i < stats.length; i++) {
+      if (st == stats[i]) {
+        return i;
+      }
+    }
+    return -1;
+  },
+
+  ro: function(num) {
+    return Math.ceil(Math.random() * num);
+  },
+
+  rn: function(min, max) {
+    return Math.floor(Math.random() * (max-min+1) + min);
   }
 }

@@ -73,5 +73,55 @@ module.exports = {
         })
       }
     }
+  },
+  jobroll: function(msg, con) {
+    let fname = msg.content.split(' ')[1];
+    let type = msg.content.split(' ')[2];
+    let i = helper.stat(type);
+    if (i > -1) {
+      access.charByName('agent', fname, '', con, function(agent){
+        if (agent.length == 1) {
+          let aname = agent[0].fname + ' ' + agent[0].lname;
+          let stats = [agent[0].stam,
+                       agent[0].str,
+                       agent[0].skl,
+                       agent[0].init,
+                       agent[0].rst,
+                       agent[0].agi,
+                       agent[0].acc,
+                       agent[0].eva,
+                       agent[0].mag,
+                       agent[0].heal,
+                       agent[0].regn,
+                       agent[0].crit,
+                       agent[0].dscr,
+                       agent[0].rng,
+                       agent[0].pow,
+                       agent[0].supt];
+
+          let astat = stats[i];
+          let roll = helper.ro(20);
+          let total = roll + astat;
+          let statement = '';
+          if (total == 1) {
+            statement = 'Mission failed.';
+          }
+          else if (total < 10) {
+            statement = 'Might not be the most successful but the mission is salvageable.';
+          }
+          else if (total == 20) {
+            statement = 'Mission success.';
+          }
+          else if (total > 20) {
+            statement = 'You have exceeded expectations. Well done agent.';
+          }
+          else {
+            statement = 'Mission complete.';
+          }
+          let res = 'Rolling for agent ' + aname + '...\n\nRolled 1d20 = ' + roll + ' + ' + astat + ' (' + type + ') = ' + total + '\n\n' + statement;
+          msg.channel.send(res);
+        }
+      })
+    }
   }
 }
