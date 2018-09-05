@@ -96,7 +96,7 @@ bot.on('message', (message) => {
     message.channel.send('Happy to be of assistance.');
   }
 
-  if (msg == 'this is so sad mal play despacito') {
+  if (msg.includes('mal play despacito')) {
     message.channel.send("https://youtu.be/kJQP7kiw5Fk");
   }
 
